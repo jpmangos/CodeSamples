@@ -1,0 +1,37 @@
+﻿@model Assignment1.Models.BlogPosts
+
+@{
+    ViewData["Title"] = "EditBlogPost";
+}
+
+<h1>Edit a blog post</h1>
+
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-controller="Home" asp-action="ModifyBlogPost" method="post" asp-route-id="@Model.BlogPostId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea rows="20" asp-for="Content" class="form-control"> </textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

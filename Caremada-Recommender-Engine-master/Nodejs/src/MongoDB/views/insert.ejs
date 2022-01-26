@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+
+  <h2>Insert <%= datasetName[0].toUpperCase() + datasetName.substring(1) %> Record</h2><br><br>
+
+  <form class="" action="/insert/<%= datasetName %>" method="post">
+  
+    <% headers.forEach(function(column) { %>
+      <% if (column === '_id' || column === '__v') { return; } %>
+      <div class="form-group">
+        <label for="<%= column %>"><%= column %></label>
+        <input type="text" id="<%= column %>" name="<%= column %>" class="form-control" required>
+      </div>
+    <% }) %>
+
+    <br>
+    <button type="submit" class="btn btn-light" style="color:black">Submit</button>
+  </form>
+
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Assignment1.Models.BlogPosts>
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (Model == null || Model.Count() == 0)
+{
+<div class="text-center">
+    <h4>Currently, there are no blog posts to display.</h4>
+</div>
+}
+else
+{
+@foreach (var item in Model)
+        {
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <a asp-controller="Home" asp-action="ViewBlogPost" asp-route-id="@item.BlogPostId">@item.Title</a>
+        </h4>
+        <p>@item.Content</p>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="float-left">Posted On: @item.Posted</div>
+        @if(Convert.ToInt32(Context.Session.GetString("RoleId")) == 1)
+        {
+        <div class="float-right">
+            <a class="btn-sm btn-danger" asp-controller="Home" asp-action="DeleteBlogPost" asp-route-id="@item.BlogPostId" onclick="return confirm('Are you sure?')">Delete</a>
+            <a class="btn-sm btn-primary" asp-controller="Home" asp-action="EditBlogPost" asp-route-id="@item.BlogPostId">Edit</a>
+        </div>
+        }
+    </div>
+
+</div>
+        }
+}

@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+
+  <h2>Edit <%= datasetName[0].toUpperCase() + datasetName.substring(1) %> Record</h2><br><br>
+
+  <form class="" action="/edit/<%= datasetName %>" method="post">
+
+  <% Object.keys(record).forEach(function(column) { %>
+    <% if (column === 'id') { return; } %>
+    <div class="form-group">
+      <label for="<%= column %>"><%= column %></label>
+      <input type="text" id="<%= column %>" name="<%= column %>" class="form-control" value="<%= record[column] %>" required>
+    </div>
+  <% }) %>
+
+  <input type="hidden" id="id" name="id" class="" value="<%= record.id %>">
+
+  <br>
+  <button type="submit" class="btn btn-light" style="color:black">Submit</button>
+  </form>
+
+</div>
+
+<%- include('partials/footer') %>

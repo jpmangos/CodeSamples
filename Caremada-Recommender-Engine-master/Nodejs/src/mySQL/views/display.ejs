@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+<div class="container-fluid table-responsive bg-white text-dark" id="mainContent">
+  <div class="row">
+
+  
+    <div class="col-sm-10">
+      <table class="table table-striped table-fixed ">
+        <thead>
+          <tr>
+            <th></th> <!-- The column name above the 'Recommend' button is left blank -->
+            <% headers.forEach(function(col) { %>
+              <% if (col == 'id') { return; } %>
+              <th><%= col %></th>
+              <% }); %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% dataset.forEach(function(entry, index) { %>
+            <tr id="row<%= index %>">
+              <td>
+                
+                  <div class="dropdown">
+
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <form class="" action="/recommendation/<%= datasetName %>/<%= entry['id'] %>" method="get">
+                        <button class="dropdown-item" type="submit" class="btn btn-secondary">Recommend</button>
+                      </form>
+                      <form class="" action="/edit/<%= datasetName %>/<%= entry['id'] %>" method="get">
+                        <button class="dropdown-item" type="submit" class="btn btn-secondary">Edit</button>
+                      </form>
+                      <form class="" action="/delete/<%= datasetName %>/<%= entry['id'] %>" method="post">
+                        <button class="dropdown-item" type="submit" class="btn btn-secondary">Delete</button>
+                      </form>
+                    </div>
+
+                  </div>
+              </td>
+
+              <% headers.forEach(function(key) { %>
+                <% if (key === 'id') { return; } %>
+                <td id="<%= key %><%= index %>">
+                  <%= entry[key] %>
+                </td>
+              <% }); %>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  <%- include('partials/footer') %>

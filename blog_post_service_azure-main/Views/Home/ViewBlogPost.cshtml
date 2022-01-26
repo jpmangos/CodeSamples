@@ -1,0 +1,68 @@
+﻿@model Assignment1.Models.BlogPosts
+@using Assignment1.Models;
+@{
+    ViewData["Title"] = "ViewBlogPost";
+    Comments commentForm = new Comments();
+}
+
+<div class="card mb-5">
+    <div class="card-body">
+        <h4 class="card-title">
+            @Html.DisplayFor(model => model.Title)
+        </h4>
+        <p>@Html.DisplayFor(model => model.Content)</p>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="float-left">
+            Posted On: @Html.DisplayFor(model => model.Posted)
+            Written by: @Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)
+        </div>
+    </div>
+
+
+
+</div>
+<h4>Comments</h4>
+
+@foreach (var comment in @Model.Comments)
+{
+<div class="row mt-2">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <p>@comment.Content</p>
+            </div>
+            <div class="card-footer text-muted text-sm-left">
+
+                by @comment.User.FirstName @comment.User.LastName
+
+            </div>
+        </div>
+    </div>
+</div>
+        }
+    
+<hr />
+    <div class="row mt-2">
+        <div class="col">
+
+            @if (Context.Session.GetString("UserId") != null)
+            {
+            
+                <form asp-controller="Home" asp-action="AddComment" method="post" asp-route-id="@Model.BlogPostId">
+                    <div class="form-group">
+                        <label asp-for="@commentForm.Content class=" control-label h4"> <b>Add Comment</b></label>
+                        <textarea rows="20" asp-for="@commentForm.Content" class="form-control"> </textarea>
+                        <span asp-validation-for="@commentForm.Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <h4 class="mt-5">Please Login to comment</h4>
+            }
+        </div>
+    </div>
