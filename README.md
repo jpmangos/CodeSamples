@@ -2,7 +2,7 @@
 Code Samples for Employers
 
 # Playtpus Compiler
- This is a school project to build a buffer, scanner, and parser components of a compiler.
+ This is a school project to build a buffer, scanner, and parser components of a compiler. scanner.c, buffer.c, and parser.c contain the bulk of the code I wrote.
 
 # Blog Post Service
 A school project that uses C#, Visual Studio, and Azure to hosts a simple blog with CRUD functions.
